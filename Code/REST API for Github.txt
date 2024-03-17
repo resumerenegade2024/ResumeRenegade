@@ -1,0 +1,92 @@
+Page 1 also talks about a REST API so I asked ChatGPT to give me one that mirrors the one used for the resume matching chatbot.
+Please add this to GitHub if needed.
+ 
+ 
+Below is an example that outlines the REST API. This service could allow users to submit resumes and job descriptions, and then receive matched results based on their queries. This example will cover basic functionalities such as submitting a resume, submitting a job description, and retrieving matched results.
+ 
+***
+### Base URL
+For the purposes of this example, the base URL could be:
+```
+https://api.resumematching.com/
+```
+ 
+### Authentication
+Requests to the API require authentication, typically provided as an API key:
+```http
+Authorization: Bearer YOUR_API_KEY
+```
+ 
+### Endpoint for Submitting a Resume
+To add a resume to the system, a user might send a POST request to:
+```
+POST /v1/resumes
+```
+ 
+#### Request Body
+```json
+{
+  "candidateName": "John Doe",
+  "skills": ["Python", "Machine Learning", "Data Analysis"],
+  "experience": [
+    {
+      "role": "Data Scientist",
+      "years": 2,
+      "company": "TechCorp"
+    }
+  ],
+  "education": "Master's in Data Science"
+}
+```
+ 
+### Endpoint for Submitting a Job Description
+To add a job description, a user might send a POST request to:
+```
+POST /v1/jobs
+```
+ 
+#### Request Body
+```json
+{
+  "jobTitle": "Senior Data Scientist",
+  "requiredSkills": ["Python", "Machine Learning", "Leadership"],
+  "preferredSkills": ["Public Speaking", "Data Visualization"],
+  "experienceRequired": 5
+}
+```
+ 
+### Endpoint for Matching Resumes to a Job
+To get matched candidates for a specific job, a user might send a GET request to:
+```
+GET /v1/jobs/{jobId}/matches
+```
+ 
+#### Response
+```json
+{
+  "jobId": "abc123",
+  "matches": [
+    {
+      "candidateName": "John Doe",
+      "matchPercentage": 85,
+      "skillsMatch": ["Python", "Machine Learning"],
+      "experienceMatch": 2
+    },
+    {
+      "candidateName": "Jane Smith",
+      "matchPercentage": 75,
+      "skillsMatch": ["Python", "Data Visualization"],
+      "experienceMatch": 5
+    }
+  ]
+}
+```
+ 
+### Additional Functionalities
+Beyond these basic functionalities, the API might also support features like updating or deleting resumes and job descriptions, retrieving detailed analysis of matches, and setting up notifications for when new matches are found.
+ 
+### Rate Limiting and Usage Quotas
+The API would implement rate limiting and usage quotas to ensure the service remains reliable and performant for all users. Information about current usage and limits could be included in the HTTP headers of the response.
+ 
+This example abstracts many details that would be necessary for a fully functional API, such as error handling, pagination for large result sets, and security considerations for handling personal data. However, it provides a basic framework for understanding how such a service might be accessed programmatically.
+
